@@ -130,8 +130,8 @@ public class IntegerSet {
 	 * Set union
 	 */
 	
-	public void union(IntegerSet intSetb) {
-		List<Integer> setB = intSetb.getSet();	
+	public void union(IntegerSet b) {
+		List<Integer> setB = b.getSet();	
 		for (int i = 0; i<setB.size(); i++) {
 			if (!this.contains(setB.get(i))) {
 				this.add(setB.get(i));
@@ -143,10 +143,10 @@ public class IntegerSet {
 	 * Set intersection
 	 */
 	
-	public void intersect(IntegerSet intSetb) {
-		List<Integer> setB = intSetb.getSet();
+	public void intersect(IntegerSet b) {
+		List<Integer> setB = b.getSet();
 			for(int i = 0; i<setB.size(); i++) {
-				if( intSetb.contains(i)) {
+				if( b.contains(i)) {
 					setB.add(i);
 				}
 			}
@@ -159,15 +159,15 @@ public class IntegerSet {
 	 * Set difference, i.e., s1 –s2
 	 */
 	
-	public void diff(IntegerSet intSetb) {
+	public void diff(IntegerSet b) {
 		for(int i=0; i<set.size(); i++) { 
-			if(intSetb.contains(set.get(i))) { 
+			if(b.contains(set.get(i))) { 
 				set.remove(set.get(i)); 
-				intSetb.remove(set.get(i));
+				b.remove(set.get(i));
 			};
 		} 	
-		for(int i=0; i<intSetb.length();i++) {
-			set.add(intSetb.get(i)); 
+		for(int i=0; i<b.length();i++) {
+			set.add(b.get(i)); 
 		}
 
 	}
