@@ -23,10 +23,10 @@ import static org.junit.Assert.assertTrue;
 
 class IntegerSetTest {
 
-	IntegerSet standard = new IntegerSet(Arrays.asList(1, 2, 3, 4, 5, 6));
-	IntegerSet single = new IntegerSet(Arrays.asList(11));
-	IntegerSet four1 = new IntegerSet(Arrays.asList(5, 1, 15, 3));
-	IntegerSet four2 = new IntegerSet(Arrays.asList(2, 3, 4, 5));
+	IntegerSet set = new IntegerSet(Arrays.asList(1, 2, 3, 4, 5, 6));
+	IntegerSet oneset = new IntegerSet(Arrays.asList(11));
+	IntegerSet fourset1 = new IntegerSet(Arrays.asList(5, 1, 15, 3));
+	IntegerSet fourset2 = new IntegerSet(Arrays.asList(2, 3, 4, 5));
 	IntegerSet empty = new IntegerSet(Arrays.asList());
 
 	/**
@@ -46,10 +46,10 @@ class IntegerSetTest {
 	
 	@AfterEach
 	void tearDown() throws Exception {
-		standard = new IntegerSet(Arrays.asList(1, 2, 3, 4, 5, 6));
-		single = new IntegerSet(Arrays.asList(11));
-		four1 = new IntegerSet(Arrays.asList(5, 1, 15, 3));
-		four2 = new IntegerSet(Arrays.asList(2,3, 4, 5));
+		set = new IntegerSet(Arrays.asList(1, 2, 3, 4, 5, 6));
+		oneset = new IntegerSet(Arrays.asList(11));
+		fourset1 = new IntegerSet(Arrays.asList(5, 1, 15, 3));
+		fourset2 = new IntegerSet(Arrays.asList(2,3, 4, 5));
 		empty = new IntegerSet(Arrays.asList());
 	}
 
@@ -57,17 +57,17 @@ class IntegerSetTest {
 	@Test
 	@DisplayName("Test cases for clear")
 	void testClear() {
-		standard.clear();
-		assertEquals(Arrays.asList(), standard.getSet());
+		set.clear();
+		assertEquals(Arrays.asList(), set.getSet());
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for length")
 	void testLength() {
-		assertEquals(6, standard.length());
-		assertEquals(4, four1.length());
-		assertEquals(1, single.length());
+		assertEquals(6, set.length());
+		assertEquals(4, fourset1.length());
+		assertEquals(1, oneset.length());
 		assertEquals(0, empty.length());
 	}
 	
@@ -75,24 +75,24 @@ class IntegerSetTest {
 	@Test
 	@DisplayName("Test cases for equals")
 	void testEquals() {
-		assertTrue(standard.equals(standard));
-		assertFalse(standard.equals(four2));
+		assertTrue(set.equals(set));
+		assertFalse(set.equals(fourset2));
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for contains")
 	void testContains() {
-		assertTrue(standard.contains(1));
-		assertFalse(standard.contains(0));
+		assertTrue(set.contains(1));
+		assertFalse(set.contains(0));
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for largest")
 	void testLargest() throws IntegerSetException{
-		assertEquals(6, standard.largest());
-		assertEquals(11, single.largest());
+		assertEquals(6, set.largest());
+		assertEquals(11, oneset.largest());
 		Throwable exception = assertThrows(IntegerSetException.class, () -> {empty.largest();});
 		assertEquals("IntegerSetException: The largest number cannot be found because the list is empty!", exception.getMessage());
 	}
@@ -101,8 +101,8 @@ class IntegerSetTest {
 	@Test
 	@DisplayName("Test cases for smallest")
 	void testSmallest() throws IntegerSetException{
-		assertEquals(1, standard.smallest());
-		assertEquals(11, single.smallest());
+		assertEquals(1, set.smallest());
+		assertEquals(11, oneset.smallest());
 		Throwable exception = assertThrows(IntegerSetException.class, () -> {empty.smallest();});
 	    assertEquals("IntegerSetException: The smallest number cannot be found because the list is empty!", exception.getMessage());
 	}
@@ -111,56 +111,56 @@ class IntegerSetTest {
 	@Test
 	@DisplayName("Test cases for add")
 	void testAdd() {
-		standard.add(1);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), standard.getSet());
-		standard.add(0);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 0), standard.getSet());
+		set.add(1);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), set.getSet());
+		set.add(0);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 0), set.getSet());
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for remove")
 	void testRemove() {
-		standard.remove(0);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), standard.getSet());
-		standard.remove(1);
-		assertEquals(Arrays.asList(2, 3, 4, 5, 6), standard.getSet());
+		set.remove(0);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), set.getSet());
+		set.remove(1);
+		assertEquals(Arrays.asList(2, 3, 4, 5, 6), set.getSet());
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for union")
 	void testUnion() {
-		standard.union(empty);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), standard.getSet());
-		empty.union(standard);
+		set.union(empty);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), set.getSet());
+		empty.union(set);
 		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), empty.getSet());
-		standard.union(four2);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), standard.getSet());
+		set.union(fourset2);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), set.getSet());
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for intersect")
 	void testIntersect() {
-		standard.intersect(standard);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), standard.getSet());
-		empty.intersect(standard);
+		set.intersect(set);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), set.getSet());
+		empty.intersect(set);
 		assertEquals(Arrays.asList(), empty.getSet());
-		standard.intersect(four2);
-		assertEquals(Arrays.asList(2,3, 4, 5), standard.getSet());
+		set.intersect(fourset2);
+		assertEquals(Arrays.asList(2,3, 4, 5), set.getSet());
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for diff")
 	void testDiff() {
-		standard.diff(empty);
-		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), standard.getSet());
-		empty.diff(standard);
+		set.diff(empty);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6), set.getSet());
+		empty.diff(set);
 		assertEquals(Arrays.asList(), empty.getSet());
-		standard.diff(four2);
-		assertEquals(Arrays.asList(1, 6), standard.getSet());
+		set.diff(fourset2);
+		assertEquals(Arrays.asList(1, 6), set.getSet());
 	}
 	
 	
@@ -168,14 +168,14 @@ class IntegerSetTest {
 	@DisplayName("Test cases for isEmpty")
 	void testIsEmpty() {
 		assertTrue(empty.isEmpty());
-		assertFalse(standard.isEmpty());
+		assertFalse(set.isEmpty());
 	}
 	
 	
 	@Test
 	@DisplayName("Test cases for toString")
 	void testToString() {
-		assertEquals("[1, 2, 3, 4, 5, 6]", standard.toString());
+		assertEquals("[1, 2, 3, 4, 5, 6]", set.toString());
 		assertEquals("[]", empty.toString());
 	}
 
