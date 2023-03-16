@@ -2,15 +2,15 @@ package org.howard.edu.lsp.assignment4;
 
 public class Driver {
 
-	public static void main(String[] args) throws IntegerSetExecption {
-		IntegerSet set1 = new IntegerSet();
+	public static void main(String[] args) throws IntegerSetException {
+		IntegerSet set1 = new IntegerSet(null);
 		
 		set1.add(3);
 		set1.add(10);
 		set1.add(1);
 		set1.add(7);
 		
-		IntegerSet set2 = new IntegerSet();
+		IntegerSet set2 = new IntegerSet(null);
 		
 		set2.add(4);
 		set2.add(5);
@@ -53,7 +53,7 @@ public class Driver {
 		set2.remove(5);
 		System.out.println("The values of set2 are " + set2.getSet());
 		
-		set1.clear();
+		//set1.clear();
 		System.out.println("Is set1 empty? " + set1.isEmpty());
 		
 
